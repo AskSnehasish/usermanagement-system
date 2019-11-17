@@ -1,0 +1,68 @@
+<div class="signup-background">
+  <mat-card>
+    <mat-toolbar>User Registration</mat-toolbar>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="container">
+      <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input matInput placeholder="Please enter your full name" isAlphabet formControlName="name">
+        <mat-error *ngIf="name.invalid">Please enter your full name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email ID</mat-label>
+        <input matInput placeholder="Please enter your email id" (mouseleave)="onEmailChange()" formControlName="email">
+        <mat-error *ngIf="email.invalid">The enter a valid email id.</mat-error>
+      </mat-form-field>
+      <p *ngIf="emailExists" style="font-size: 65%;color: #ed4134;margin-top: -17px;">Email ID already exists</p>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="text" matInput placeholder="Please enter your password" formControlName="password">
+        <!-- <mat-error *ngIf="addForm.value.password === 'd'">The email should contain @</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input type="text" matInput placeholder="Please enter your password" formControlName="confirmPassword">
+        <mat-error *ngIf="f.confirmPassword.errors != null && f.confirmPassword.errors.mustMatch">The email should
+          contain @</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Phone Number</mat-label>
+        <input matInput placeholder="Please enter your Phone Number" isNumbersOnly formControlName="phone">
+        <mat-error *ngIf="phone.invalid">Please enter your phone number</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Website Address</mat-label>
+        <input type="url" matInput placeholder="Please enter your website url" formControlName="webUrl">
+        <mat-error *ngIf="webUrl.invalid">Please enter your website url.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option *ngFor="let gen of genders" [value]="gen.value">
+            {{gen.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <textarea type="url" matInput placeholder="Please enter your Address" specialIsAlphaNumeric
+          formControlName="address"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Sign Up</button>
+    </form>
+
+  </mat-card>
+</div>

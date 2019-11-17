@@ -1,0 +1,20 @@
+<div class="signup-background">
+  <mat-card>
+    <mat-toolbar>Login</mat-toolbar>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="container">
+      <mat-form-field>
+        <mat-label>Email ID</mat-label>
+        <input matInput placeholder="Please enter your email id" formControlName="email" specialIsEmail>
+        <mat-error *ngIf="email.invalid">The enter a valid email address.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="Please enter your password" formControlName="password">
+        <mat-error *ngIf="password.invalid">Please enter your password.</mat-error>
+      </mat-form-field>
+      <span style="color: #ed4134;font-size: 13px;margin-bottom: 30px;">{{message}}</span>
+      <button mat-raised-button color="primary">Login</button>
+    </form>
+  </mat-card>
+</div>

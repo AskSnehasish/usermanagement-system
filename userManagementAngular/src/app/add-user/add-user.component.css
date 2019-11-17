@@ -1,0 +1,25 @@
+h2 {
+    color: red;
+    background-color: blue;
+}
+
+.container {
+display: flex;
+  flex-direction: column;
+}
+
+.container > * {
+  width: 100%;
+}
+
+mat-card {
+    width: 50%;
+    margin: auto;
+}
+
+.signup-background {
+    background: purple !important;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /* height: 100% !important; */
+}

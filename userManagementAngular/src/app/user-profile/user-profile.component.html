@@ -1,0 +1,59 @@
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <!-- Tool Bar start -->
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="app-name" style="width: 100%;">User management system</h1>
+
+    <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+      <mat-icon>logout</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="onLogOut();">Log Off</button>
+    </mat-menu>
+  </mat-toolbar>
+  <!-- Tool Bar End -->
+  <!-- Side Nav Container Start -->
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item routerLink="{{nav.router}}" *ngFor="let nav of fillerNav">{{nav.text}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <!-- Main Container Start -->
+    <mat-sidenav-content>
+      <!-- Card view Start -->
+      <mat-card>
+        <!-- List View Start -->
+        <mat-list>
+          <mat-list-item><strong style="font-size: 21px;">Welcome! {{userData.name}}...</strong></mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><strong>DOB: </strong> <span style="padding-left: 10px;">{{userData.dob | date: 'dd/MM/yyyy'}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><strong>Gender: </strong> <span style="padding-left: 10px;">{{userData.gender}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><strong>Email ID: </strong> <span style="padding-left: 10px;">{{userData.email}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><strong>Phone Number: </strong> <span style="padding-left: 10px;">{{userData.phone}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><strong>Address: </strong> <span style="padding-left: 10px;">{{userData.address}}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item><strong>Website URL: </strong> <span style="padding-left: 10px;">{{userData.webUrl}}</span>
+          </mat-list-item>
+        </mat-list>
+        <!-- List View End -->
+        <button mat-button color="primary" (click)="onEdit(userData)">Edit</button>
+      </mat-card>
+      <!-- Card view End -->
+    </mat-sidenav-content>
+    <!-- Main Container End -->
+  </mat-sidenav-container>
+  <!-- Side Nav Container End -->
+</div>

@@ -1,0 +1,105 @@
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <!-- Tool Bar start -->
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="app-name" style="width: 100%;">User management system</h1>
+
+    <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+      <mat-icon>logout</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="onLogOut();">Log Off</button>
+    </mat-menu>
+  </mat-toolbar>
+  <!-- Tool Bar End -->
+
+  <!-- Side Nav Container Start -->
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item routerLink="{{nav.router}}" *ngFor="let nav of fillerNav">{{nav.text}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <!-- Main Container Start -->
+    <mat-sidenav-content>
+      <mat-card>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Serial Number Column -->
+            <ng-container matColumnDef="index">
+              <th mat-header-cell *matHeaderCellDef> SL. </th>
+              <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Gender Column -->
+            <ng-container matColumnDef="gender">
+              <th mat-header-cell *matHeaderCellDef> Gender </th>
+              <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+            </ng-container>
+
+            <!-- Date of Birth Column -->
+            <ng-container matColumnDef="dob">
+              <th mat-header-cell *matHeaderCellDef> Date of birth </th>
+              <td mat-cell *matCellDef="let element"> {{element.dob | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+            <!-- Email ID Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <!-- Website URL Column -->
+            <ng-container matColumnDef="webUrl">
+              <th mat-header-cell *matHeaderCellDef> Website URL </th>
+              <td mat-cell *matCellDef="let element"> {{element.webUrl}} </td>
+            </ng-container>
+
+            <!-- Phone Column -->
+            <ng-container matColumnDef="phone">
+              <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+              <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+            </ng-container>
+
+            <!-- Address Column -->
+            <ng-container matColumnDef="address">
+              <th mat-header-cell *matHeaderCellDef> Address </th>
+              <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+
+            <!-- Edit Option Column -->
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> Edit </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="primary" (click)="onEdit(element)">Edit</button>
+              </td>
+            </ng-container>
+
+            <!-- Delete Option Column -->
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> Delete </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="warn" (click)="openDialog(element)">Delete</button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <!-- Pagination -->
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </mat-card>
+    </mat-sidenav-content>
+    <!-- Main Container End -->
+  </mat-sidenav-container>
+  <!-- Side Nav Container End -->
+</div>

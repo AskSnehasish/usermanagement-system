@@ -1,0 +1,86 @@
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <!-- Tool Bar start -->
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="app-name" style="width: 100%;">User management system</h1>
+    <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+      <mat-icon>logout</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="onLogOut();">Log Off</button>
+    </mat-menu>
+  </mat-toolbar>
+  <!-- Tool Bar End -->
+  <!-- Side Nav Container Start -->
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item routerLink="{{nav.router}}" *ngFor="let nav of fillerNav">{{nav.text}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <!-- Main Container Start -->
+    <mat-sidenav-content>
+      <mat-card>
+        <mat-toolbar>Profile Update</mat-toolbar>
+        <!-- Form Start -->
+        <form [formGroup]="addForm" class="container">
+          <mat-form-field>
+            <mat-label>Full Name</mat-label>
+            <input matInput placeholder="Please enter your full name" isAlphabet formControlName="name">
+            <mat-error *ngIf="name.invalid">Please enter your full name</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Email ID</mat-label>
+            <input matInput placeholder="Please enter your email id" formControlName="email" readonly>
+            <mat-error *ngIf="email.invalid">The enter a valid email id.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input matInput placeholder="Please enter your Phone Number" isNumbersOnly formControlName="phone">
+            <mat-error *ngIf="phone.invalid">Please enter your phone number</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Website Address</mat-label>
+            <input type="url" matInput placeholder="Please enter your website url" formControlName="webUrl">
+            <mat-error *ngIf="webUrl.invalid">Please enter your website url.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                {{gender.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <textarea type="url" matInput placeholder="Please enter your Address" specialIsAlphaNumeric
+              formControlName="address"></textarea>
+          </mat-form-field>
+          <div class="button-group">
+            <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="onBack()">Back</button>
+            <button mat-raised-button type="submit" (click)="onSubmit()" color="primary">Update</button>
+          </div>
+        </form>
+        <!-- Form End -->
+      </mat-card>
+    </mat-sidenav-content>
+    <!-- Main Container End -->
+  </mat-sidenav-container>
+  <!-- Side Nav Container End -->
+</div>
