@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {MediaMatcher} from '@angular/cdk/layout';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { UserService } from "../_services/user.service";
 import { AuthenticationService } from "../_services/authentication.service";
 import { Title } from '@angular/platform-browser';
@@ -14,24 +14,21 @@ import { Title } from '@angular/platform-browser';
 })
 
 export class UserProfileComponent implements OnInit {
-  displayedColumns: string[] = ['index', 'name', 'gender', 'dob', 'email', 'webUrl', 'phone', 'address', 'edit'];
-  dataSource = new MatTableDataSource();
-
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   mobileQuery: MediaQueryList;
-  navData = [{nav:[{ text: 'Profile Update', router: '/profile'}, {text: 'List Users',router: '/list-users'}], role: 'admin'},{nav:[{text: 'Profile Update',router: '/profile'}], role: 'user'}];
+  navData = [{ nav: [{ text: 'Profile Update', router: '/profile' }, { text: 'List Users', router: '/list-users' }], role: 'admin' }, { nav: [{ text: 'Profile Update', router: '/profile' }], role: 'user' }];
   fillerNav = this.navData.find(u => u.role == JSON.parse(localStorage.getItem("currentUser")).role).nav;
   private _mobileQueryListener: () => void;
   userData: any;
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,private router: Router, private userService: UserService, private authService: AuthenticationService, private title: Title) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private userService: UserService, private authService: AuthenticationService, private title: Title) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.title.setTitle("Profile");  // Sets the page title to the provided string
   }
 
   ngOnInit() {
-    this.title.setTitle("Profile");
-    this.userData = JSON.parse(localStorage.getItem("currentUser"));
+    this.userData = JSON.parse(localStorage.getItem("currentUser")); // Gets the user data from the local storage
   }
 
 
