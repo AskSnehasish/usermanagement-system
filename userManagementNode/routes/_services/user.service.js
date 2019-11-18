@@ -1,9 +1,9 @@
 const mongoService = require('./mongo.service');
 
-
+// "userLogin" is the name of the collection in which all the user details are stored
 exports.addUser = function (data, callback) {
     const { _id,token,confirmPassword, ...dataWithoutID } = data;
-    mongoService.insertDocument(dataWithoutID, "userLogin", function(response) {
+    mongoService.insertDocument(dataWithoutID, "userLogin", function(response) { 
         callback(true);
     })
 };

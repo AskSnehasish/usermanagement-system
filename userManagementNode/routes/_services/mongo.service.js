@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
-var DB = "accenture";
+var url = "mongodb://localhost:27017/"; // Replace it with your database connection
+var DB = "accenture"; // replace it with your database name
 
 exports.createCollection = function (collectionName, callback) {
     MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
