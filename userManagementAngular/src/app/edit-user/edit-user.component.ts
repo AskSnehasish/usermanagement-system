@@ -33,7 +33,7 @@ export class EditUserComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    this.title.setTitle("Edit user details")
+    this.title.setTitle("Edit user details"); // Sets the page title to the provided string
   }
 
   addForm: FormGroup;

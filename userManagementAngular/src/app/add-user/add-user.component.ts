@@ -85,7 +85,6 @@ export class AddUserComponent implements OnInit {
 
   }
 
-
   onPasswordChange() {
     this.passwordError = (this.password.value !== this.confirmPassword.value);
   }
