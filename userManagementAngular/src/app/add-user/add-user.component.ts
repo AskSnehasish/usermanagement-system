@@ -52,7 +52,7 @@ export class AddUserComponent implements OnInit {
   confirmPassword = new FormControl('', [Validators.required]);
   validator = this.MustMatch('password', 'confirmPassword');
 
-// Gender List for populating the dropdown
+  // Gender List for populating the dropdown
   genders = [
     { value: 'Male', viewValue: 'Male' },
     { value: 'Female', viewValue: 'Female' }

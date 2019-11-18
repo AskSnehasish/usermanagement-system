@@ -20,6 +20,8 @@ export class EditUserComponent implements OnInit {
   private _mobileQueryListener: () => void;
   type: any;
   data: any;
+
+  // Form control defination
   email = new FormControl('', [Validators.required, Validators.email]);
   name = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   webUrl = new FormControl('', [Validators.required, Validators.pattern("(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?")]);
@@ -27,7 +29,7 @@ export class EditUserComponent implements OnInit {
   address = new FormControl('', [Validators.required]);
   dob = new FormControl('', [Validators.required]);
   gender = new FormControl('', [Validators.required]);
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private userService: UserService, private authService: AuthenticationService,private title: Title) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private userService: UserService, private authService: AuthenticationService, private title: Title) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -35,9 +37,8 @@ export class EditUserComponent implements OnInit {
   }
 
   addForm: FormGroup;
-  submitted = false;
 
-
+  // Gender List for populating the dropdown
   genders = [
     { value: 'Male', viewValue: 'Male' },
     { value: 'Female', viewValue: 'Female' }
@@ -65,11 +66,11 @@ export class EditUserComponent implements OnInit {
       if (this.data.type === "adminUpdate") {
         this.router.navigate(['list-users']);
       } else {
-        let newData = this.addForm.value;
-        newData.token = this.data.token;
-        newData.role = this.data.role;
-        localStorage.removeItem('currentUser');
-        localStorage.setItem('currentUser', JSON.stringify(newData));
+        let newData = this.addForm.value; // Keeping the updated data in a temporary variable
+        newData.token = this.data.token; // Adding the JWT token to the temporary variable
+        newData.role = this.data.role; // Adding the user role to the temporary variable
+        localStorage.removeItem('currentUser'); // Removing the user data from local storage
+        localStorage.setItem('currentUser', JSON.stringify(newData)); // Setting the currentUser value in the local storage to the temporary variable
         this.router.navigate(['profile']);
       }
     });
@@ -77,7 +78,7 @@ export class EditUserComponent implements OnInit {
 
   onBack() {
     localStorage.removeItem('dataToEdit');
-    if (this.type == "adminUpdate") {
+    if (this.type == "adminUpdate") { // Checking with the Flag "adminUpdate" for the edit option in the user list view
       this.router.navigate(['list-users']);
     } else {
       this.router.navigate(['profile']);
