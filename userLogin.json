@@ -1,0 +1,1 @@
+{"_id":{"$oid":"5dced541945b7ffc5d34060d"},"email":"admin@exmaple.com","name":"Administrator","webUrl":"https://www.example.com","phone":"9999999999","address":"Example Address","dob":"1996-11-07T18:30:00.000Z","gender":"Male","password":"849f1575ccfbf3a4d6cf00e6c5641b7fd4da2ed3e212c2d79ba9161a5a432ff0","role":"admin"}
