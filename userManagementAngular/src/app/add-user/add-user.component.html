@@ -24,13 +24,13 @@
 
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input type="text" matInput placeholder="Please enter your password" formControlName="password">
+        <input type="password matInput placeholder="Please enter your password" formControlName="password">
         <!-- <mat-error *ngIf="addForm.value.password === 'd'">The email should contain @</mat-error> -->
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Confirm Password</mat-label>
-        <input type="text" matInput placeholder="Please enter your password" formControlName="confirmPassword">
+        <input type="password" matInput placeholder="Please enter your password" formControlName="confirmPassword">
         <mat-error *ngIf="f.confirmPassword.errors != null && f.confirmPassword.errors.mustMatch">The email should
           contain @</mat-error>
       </mat-form-field>
